@@ -1,0 +1,120 @@
+<html>
+    <body>
+        <script
+        src="https://unpkg.com/vue">
+        </script>
+
+        <div id="a" v-bind:style="{color:'red', fontSize:'30px'}">
+            <p>{{ jellyx }}</p>
+        </div>
+
+        <div id="b">
+            <span v-bind:title="message">
+                {{ sss }}
+            </span>
+        </div>
+
+        <div id="c">
+            <p v-if="seen">now you see me</p>
+        </div>
+
+        <div id="d">
+            <ol>
+                <li v-for="thing in things">
+                    {{ thing.text }}
+                </li>
+            </ol>
+        </div>
+
+        <div id="e">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">逆转消息</button>
+        </div>
+
+        <div id="f">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+
+        <div id="g">
+            <ol>
+                <todo-item
+                    v-for='thing in list'
+                    v-bind:todo='thing'
+                    v-bind:key='thing.id'>
+                </todo-item>
+            </ol>
+        </div>
+
+        <script type="text/javascript">
+            var a = new Vue({
+                el: '#a',
+                data: {
+                    jellyx: 'the first step.'
+                }
+            })
+            
+            var b = new Vue({
+                el: '#b',
+                data: {
+                    sss: 'show the message.',
+                    message: '页面加载于' + new Date().toLocaleString()  
+                }
+            })
+
+            var c = new Vue({
+                el: "#c",
+                data: {
+                    seen: true
+                }
+            })
+
+            var d = new Vue({
+                el: "#d",
+                data: {
+                    things: [
+                        { text: 'learn javascript' },
+                        { text: 'learn Vue' },
+                        { text: 'finish the work'}
+                    ]
+                }
+            })
+
+            var e = new Vue({
+                el: '#e',
+                data: {
+                    message: 'jellyx'
+                },
+                methods: {
+                    reverseMessage: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    }
+                }
+            })
+
+            var f = new Vue({
+                el: '#f',
+                data: {
+                    message: 'jellyx'
+                }
+            })
+
+            Vue.component('todo-item', {
+                props: ['todo'],
+                template: '<li>{{ todo.text }}</li>'
+            })
+
+            var g = new Vue({
+                el: '#g',
+                data: {
+                    list: [
+                        { id:0, text: 'vegetable' },
+                        { id:1, text: 'fruit' },
+                        { id:2, text: 'others'}
+                    ]
+                }
+            })
+
+        </script>
+    </body>
+</html>

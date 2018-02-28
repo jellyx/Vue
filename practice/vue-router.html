@@ -1,0 +1,69 @@
+<html>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+<div id="app">
+    <h1>hello app!</h1>
+    <p>
+        <!-- 使用 router-link 组件来导航. -->
+        <!-- 通过传入 `to` 属性指定链接. -->
+        <!-- <router-link> 默认会被渲染成一个 `<a>` 标签，见下css样式 -->
+        <router-link to="/sfoo">go to foo</router-link>
+        <router-link to="/sbar">go to bar</router-link>
+    </p>
+    <!--路由出口-->
+    <!-- 路由匹配到的组件将渲染在这里 -->
+    <router-view class="one" name="a"></router-view>
+</div>
+
+<div id="app2">
+    <p>
+        <router-link to="/user/foo">to the foo</router-link>
+        <router-link to="/user/bar">to the bar</router-link>
+    </p>
+    <router-view class="two" name="b"></router-view>
+</div>
+
+<style type="text/css">
+    a {               /*<router-link> 默认会被渲染成一个 `<a>` 标签*/
+        color:aqua;
+        font-size: 16px;
+    }
+    .router-link-active {
+        color: red;
+        font-size:32px;
+    }
+</style>
+
+<script type="text/javascript">
+    //1、定义路由组件
+    const Foo = {template: '<div>foo</div>'}
+    const Bar = {template: '<div>bar</div>'}
+    //2、定义路由，每个路由应该映射一个组件
+    const routes = [
+        { path: '/sfoo', components: {a:Foo} },
+        { path: '/sbar', components: {a:Bar} }
+    ]
+    //3、创建router实例，然后传入'routes'配置
+    const router = new VueRouter({
+        routes //缩写，相当于routes:routes。若用routes233，则必须写成routes:routes233
+    })
+    //4、创建和挂载根实例，
+    //记得要通过router配置参数注入路由，从而让整个应用都有路由功能
+    const app1 = new Vue({
+        router
+    }).$mount('#app')
+
+    router.push('/sbar') //进入页面后显示这个选项
+
+    const User = { template: '<div>user {{$route.params.id}}</div>'}
+    const router2 = new VueRouter({     //上面2,3可合并为一步
+        routes: [{ path:'/user/:id', components:{b:User}}]
+    })
+    const app2 = new Vue({
+        router2
+    }).$mount('#app2')
+</script>
+
+</html>

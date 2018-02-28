@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+      <img @click="change" src="../static/image/timg.jpg" v-show="showPic">
+      <img @click="change" src="../static/image/keke.jpg" v-show="!showPic">
     <router-view/>
   </div>
 </template>
 
-<script>
+<script type="text/javascript">
 export default {
-  name: 'App'
+  name: 'App',
+  data: {
+    showPic: true
+  },
+  methods: {
+    change() {
+      this.showPic = !this.showPic
+    }
+  }
 }
 </script>
 

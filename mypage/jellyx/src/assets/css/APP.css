@@ -1,0 +1,158 @@
+#app{
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: black;
+  display: flex;
+  min-height: 100vh;
+  width: auto;
+  flex-direction: column;
+  position:relative;
+}
+
+header{
+  width: 100%;
+  height:2rem;
+  background-color:#464b51;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerNav{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
+
+.icon{
+    flex:1;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1rem;
+}
+
+header ul li{
+    padding: 0 .2rem;
+}
+
+header a{
+    color: white;
+}
+
+header li:nth-child(1){
+    border-right: .1rem solid white;
+}
+
+.headerNav li,.leftNav li,.rightNav li{
+    list-style: none;
+    display: inline-block;
+}
+
+.nav{
+    width: 100%;
+    height:4rem;
+    background-color: pink;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.nav a{
+    color: black;
+}
+
+.leftNav, .rightNav, .theme{
+    flex:1;
+    display: flex;
+    align-items: center;
+}
+
+
+.theme{
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight:bold;
+}
+
+.leftNav{
+    justify-content: flex-start;
+}
+
+.rightNav{
+    justify-content: flex-end;
+}
+
+.leftNav li, .rightNav li{
+    font-size: 2rem;
+}
+
+.leftNav a, .rightNav a{
+    display: inline-block;
+    padding:0 2.5rem;
+    line-height: 4rem;
+}
+
+.leftNav li:hover, .rightNav li:hover{
+    background-color: #00bc9b;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    color: white;
+    width: 100%;
+    height:3rem;
+    background-color:#464b51;
+}
+
+
+.footerNav{
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.footerNavList{
+    display: flex;
+    align-items: center;
+}
+
+.footerNavList li{
+    display: inline-block;
+    padding: 0 4rem;
+    font-size: 1rem;
+}
+
+
+footer a{
+  color: white;
+}
+  
+/* .body{  
+  flex:1;              双重嵌套实现上下固定中间滚动
+  position:relative;  
+  overflow: hidden;
+}
+
+#content{                    
+  position:absolute;    注意relative和position的应用
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  overflow: auto;
+} */
+
+#content{
+    width: 100%;
+    margin-bottom:3rem; 
+    flex: 1;  /*因为双重嵌套影响carousel中的瀑布流加载，取消*/
+}
+
+a{
+  cursor:pointer;
+}

@@ -1,83 +1,85 @@
 <template>
   <div id="app">
     <header>
-      <p>zheshitou</p>
-    </header>
-    <div class="body">
-      <div class="content">
-        <img @click="changePic" :src="imgSrc">
-        <router-view/>
+      <div class="icon">
+      <img src="../static/img/icon.png" alt="icon" width="20px" height="20px"/>
       </div>
+      <ul class="headerNav">
+        <li><router-link to="/login" class="login">Login</router-link></li>
+        <li><router-link to="/register" class="register">Register</router-link></li>
+      </ul>
+    </header>
+    <nav class="nav">
+      <ul class="leftNav">
+        <li v-for="leftItem in leftItems"> <!--@click="Carousel(leftItem)"  leftitem不写到carousel里的话参数传不过去的，因为都是局部作用域-->
+         <router-link :to="'/'+leftItem.text"> {{leftItem.text.toUpperCase()}}</router-link>
+        </li>
+      </ul>
+      <div class="theme">
+        <router-link to="/">Jellyx</router-link>
+      </div>
+      <ul class="rightNav">
+        <li v-for="rightItem in rightItems">
+          <router-link :to="'/'+rightItem.text">{{rightItem.text.toUpperCase()}}</router-link>
+        </li>
+      </ul>
+    </nav>
+      <div id="content">
+        <router-view></router-view>
     </div>
     <footer>
-      <p>zheshiwei</p>
+      <div class="footerNav">
+        <ul class="footerNavList">
+          <li v-for="footerNavItem in footerNavItems">
+            <a href="javascript:">{{footerNavItem.text}}</a>
+          </li>
+        </ul>
+      </div>
     </footer>
   </div>
 </template>
 
-<script>
-document.oncontextmenu = function(){
-                event.returnValue = false;
-            };
-document.onmousedown = function(){
-                if(event.button==2){
-                    return event.button = 1 ;
-                };
-}              
+<script>          
 export default {
+  el:"#app",
   name: 'App',
   data() {
     return {
-      showPic: true
+      leftItems: [
+        {
+          text:'home'
+        },
+        {
+          text:'carousel'
+        }
+      ],
+      rightItems: [
+        {
+          text:'shop'
+        },
+        {
+          text:'bbs'
+        }
+      ],
+      footerNavItems: [
+        {
+          text:'免责声明'
+        },
+        {
+          text:'关于我们'
+        },
+        {
+          text:'内容许可'
+        },
+        {
+          text:'联系方式'
+        }
+      ]
     }
-  },
-  methods: {
-    changePic() {
-      this.showPic = !this.showPic
-    }
-  },
-  computed: {
-      imgSrc() {
-          return this.showPic ? '../static/img/keke.jpg' : '../static/img/timg.jpg'
-      }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-header {
-  height:30px;
-  background-color:greenyellow;
-}
-footer {
-  height:50px;
-  background-color:plum;
-}
-
-.body {                /*双重嵌套实现上下固定中间滚动*/
-  position:relative;   /*注意relative和position的应用*/
-  flex:1;
-  overflow: hidden;
-}
-.content {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  overflow-y:auto;
-}
+ @import './assets/css/APP.css'
 </style>

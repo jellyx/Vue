@@ -11,7 +11,7 @@
     </header>
     <nav class="nav">
       <ul class="leftNav">
-        <li v-for="leftItem in leftItems"> <!--@click="Carousel(leftItem)"  leftitem不写到carousel里的话参数传不过去的，因为都是局部作用域-->
+        <li v-for="leftItem in leftItems"> <!--@click="Gakki(leftItem)"  leftitem不写到carousel里的话参数传不过去的，因为都是局部作用域-->
          <router-link :to="'/'+leftItem.text"> {{leftItem.text.toUpperCase()}}</router-link>
         </li>
       </ul>
@@ -24,8 +24,8 @@
         </li>
       </ul>
     </nav>
-      <div id="content">
-        <router-view></router-view>
+    <div id="content">
+      <router-view></router-view>
     </div>
     <footer>
       <div class="footerNav">
@@ -50,7 +50,7 @@ export default {
           text:'home'
         },
         {
-          text:'carousel'
+          text:'gakki'
         }
       ],
       rightItems: [
@@ -58,7 +58,7 @@ export default {
           text:'shop'
         },
         {
-          text:'bbs'
+          text:'todolist'
         }
       ],
       footerNavItems: [

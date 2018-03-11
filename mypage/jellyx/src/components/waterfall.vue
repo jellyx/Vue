@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'waterFall':true}" ref="container">
+  <div class="waterFall" ref="container">
     <div v-for="(item,index) of list" :key="index" class="column">
       <img :src="item.url" alt="">
     </div>
@@ -9,23 +9,21 @@
 <script>
   export default {
     props: {
-      list:{   
-        type: Array,       
+      list:{        
         required: true   // 必须提供字段
       },
       column:{
-        type: Number,
         default: 4     // 可选字段，有默认值
       }
     },
     data() {
       return {
         itemWidth: 0,
-        columnData: []
+        columnData: []   //列高
       }
     },
     watch: {
-      list(val) {         //es6 等于 list:function(val)
+      list(val) {         //es6 等于 list:function(val),list为props暴露的接口，用于gakki.vue里:list="list"的第一个list
         this.renderList()
       }
     },
@@ -43,12 +41,12 @@
           }
         })
       },
-      setElementStyle(element, img, index){  //计算图片在网页中实际高度
+      setElementStyle(element, img, index){ 
         const picWidth = this.$refs.container.offsetWidth / this.column
         const picHeight = ((picWidth - 6) / img.width) * img.height + 6    //因为padding=3，所以+6
         if (index<this.column){
           element.style.left = `${index * (100/this.column)}%` //index从0开始
-          this.columnData[index] = this.columnData[index] ? this.columnData[index] + picHeight : picHeight
+          this.columnData[index] = picHeight
         }
         else{              //找出每行最短的列
           let min={}
@@ -79,6 +77,7 @@
 
 .column{
   position: absolute;
+  box-sizing:border-box;
   padding: 3px;
   transition: all .3s ease;
 }

@@ -6,7 +6,6 @@
   min-height: 100vh;
   width: auto;
   flex-direction: column;
-  position:relative;
 }
 
 header{
@@ -72,7 +71,7 @@ header li:nth-child(1){
 
 .theme{
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight:bold;
 }
 
@@ -85,7 +84,7 @@ header li:nth-child(1){
 }
 
 .leftNav li, .rightNav li{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .leftNav a, .rightNav a{
@@ -149,7 +148,8 @@ footer a{
 
 #content{
     width: 100%;
-    margin-bottom:3rem; 
+    height: 100%;
+    padding-bottom:3rem; 
     flex: 1;  /*因为双重嵌套影响carousel中的瀑布流加载，取消*/
 }
 

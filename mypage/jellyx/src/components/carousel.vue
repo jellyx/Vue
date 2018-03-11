@@ -1,95 +1,136 @@
 <template>
-  <div class="carousel" v-if="list.length!=0">
-    <WaterFall :list="list"></WaterFall>
+  <div class="slide-show" @mouseover="clear" @mouseout="run">
+    <div class="slide-img">
+      <a>
+        <transition name="slide-trans">
+          <img v-if="isShow" :src="list[nowIndex].src">
+        </transition>
+        <transition name="slide-trans-old">
+          <img v-if="!isShow" :src="list[nowIndex].src">
+        </transition>
+      </a>
+    </div>
+    <h2>{{ list[nowIndex].title }}</h2>
+    <ul class="slide-pages">
+      <li @click="nextPic(prevIndex)">&lt;</li>
+      <li v-for="(item, index) in list" @click="nextPic(index)">
+        <a :class="{on: index === nowIndex}">{{ index + 1 }}</a>
+      </li>
+      <li @click="nextPic(nextIndex)">&gt;</li>
+    </ul>
   </div>
 </template>
 
 <script>
-  import WaterFall from './waterfall.vue'
-  export default {
-    data() {
-      return {
-        list: [],
-        flag:false
-      }
+export default {
+  props: {
+    list: {
+      type: Array,
+      default: []
     },
-    created() {
-      window.onscroll = () => {
-        if (this.flag) {
-          return
-        }
-        if (document.documentElement.scrollTop + document.body.clientHeight + 1000 > document.documentElement.scrollHeight) {
-          this.flag = true
-          this.list = this.list.concat([
-            {url:'../../static/img/gakki/gakki2.jpg', height:1200, width:794},      //正常情况下应从后端获取图片及其尺寸信息
-            {url:'../../static/img/gakki/gakki5.jpg', height:591, width:500},
-            {url:'../../static/img/gakki/gakki8.jpg', height:880, width:600},
-            {url:'../../static/img/gakki/gakki12.jpg', height:1132, width:800},
-            {url:'../../static/img/gakki/gakki9.jpg', height:810, width:539},
-            {url:'../../static/img/gakki/gakki3.jpg', height:1093, width:675},
-            {url:'../../static/img/gakki/gakki1.jpg', height:632, width:500},
-            {url:'../../static/img/gakki/gakki7.jpg', height:800, width:643},
-            {url:'../../static/img/gakki/gakki4.jpg', height:1170, width:936},
-            {url:'../../static/img/gakki/gakki6.jpg', height:750, width:500},
-            {url:'../../static/img/gakki/gakki10.jpg', height:416, width:540},
-            {url:'../../static/img/gakki/gakki11.jpg', height:800, width:600}
-          ])
-          setTimeout(() => {
-            this.flag = false
-          },500)
-        }
-      }
-    },
-    mounted() {
-      this.list = [
-            {url:'../../static/img/gakki/gakki9.jpg', height:810, width:539},       //正常情况下应从后端获取图片及其尺寸信息
-            {url:'../../static/img/gakki/gakki2.jpg', height:1200, width:794},
-            {url:'../../static/img/gakki/gakki8.jpg', height:880, width:600},
-            {url:'../../static/img/gakki/gakki10.jpg', height:416, width:540},
-            {url:'../../static/img/gakki/gakki4.jpg', height:1170, width:936},
-            {url:'../../static/img/gakki/gakki12.jpg', height:1132, width:800},
-            {url:'../../static/img/gakki/gakki7.jpg', height:800, width:643},
-            {url:'../../static/img/gakki/gakki3.jpg', height:1093, width:675},
-            {url:'../../static/img/gakki/gakki11.jpg', height:800, width:600},
-            {url:'../../static/img/gakki/gakki5.jpg', height:591, width:500},
-            {url:'../../static/img/gakki/gakki1.jpg', height:632, width:500},
-            {url:'../../static/img/gakki/gakki6.jpg', height:750, width:500},
-            {url:'../../static/img/gakki/gakki9.jpg', height:810, width:539},
-            {url:'../../static/img/gakki/gakki2.jpg', height:1200, width:794},
-            {url:'../../static/img/gakki/gakki8.jpg', height:880, width:600},
-            {url:'../../static/img/gakki/gakki10.jpg', height:416, width:540},
-            {url:'../../static/img/gakki/gakki4.jpg', height:1170, width:936},
-            {url:'../../static/img/gakki/gakki12.jpg', height:1132, width:800},
-            {url:'../../static/img/gakki/gakki7.jpg', height:800, width:643},
-            {url:'../../static/img/gakki/gakki3.jpg', height:1093, width:675},
-            {url:'../../static/img/gakki/gakki11.jpg', height:800, width:600},
-            {url:'../../static/img/gakki/gakki5.jpg', height:591, width:500},
-            {url:'../../static/img/gakki/gakki1.jpg', height:632, width:500},
-            {url:'../../static/img/gakki/gakki6.jpg', height:750, width:500},
-            {url:'../../static/img/gakki/gakki9.jpg', height:810, width:539},
-            {url:'../../static/img/gakki/gakki2.jpg', height:1200, width:794},
-            {url:'../../static/img/gakki/gakki8.jpg', height:880, width:600},
-            {url:'../../static/img/gakki/gakki10.jpg', height:416, width:540},
-            {url:'../../static/img/gakki/gakki4.jpg', height:1170, width:936},
-            {url:'../../static/img/gakki/gakki12.jpg', height:1132, width:800},
-            {url:'../../static/img/gakki/gakki7.jpg', height:800, width:643},
-            {url:'../../static/img/gakki/gakki3.jpg', height:1093, width:675},
-            {url:'../../static/img/gakki/gakki11.jpg', height:800, width:600},
-            {url:'../../static/img/gakki/gakki5.jpg', height:591, width:500},
-            {url:'../../static/img/gakki/gakki1.jpg', height:632, width:500},
-            {url:'../../static/img/gakki/gakki6.jpg', height:750, width:500}
-      ]
-    },
-    components: {
-      WaterFall
+    inv: {
+      type: Number,
+      default: 1000
     }
+  },
+  data () {
+    return {
+      nowIndex: 0,
+      isShow: true
+    }
+  },
+  computed: {
+    prevIndex () {
+      if (this.nowIndex === 0) {
+        return this.list.length - 1
+      }
+      else {
+        return this.nowIndex - 1
+      } 
+    },
+    nextIndex () {
+      if (this.nowIndex === this.list.length - 1) {
+        return 0
+      }
+      else {
+        return this.nowIndex + 1
+      }
+    }
+  },
+  methods: {
+    nextPic (index) {
+      this.isShow = false
+      setTimeout(() => {
+        this.isShow = true
+        this.nowIndex = index
+      }, 10)
+    },
+    run () {
+      this.invId = setInterval(() => {
+        this.nextPic(this.nextIndex)
+      }, this.inv)
+    },
+    clear () {
+      clearInterval(this.invId)
+    }
+  },
+  mounted () {
+    this.run();
   }
+}
 </script>
 
 <style scoped>
-  .carousel{
-    padding: 1rem 0;
-    text-align: center;
-  }
-  
+.slide-trans-enter-active {
+  transition: all .5s;
+}
+.slide-trans-enter {
+  transform: translateX(600px);
+}
+.slide-trans-old-leave-active {
+  transition: all .5s;
+  transform: translateX(-600px);
+}
+.slide-show {
+  position: relative;
+  margin: 15px 15px 15px 0;
+  width: 600px;
+  height: 300px;
+  overflow: hidden;
+}
+.slide-show h2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background: #000;
+  opacity: .5;
+  bottom: 0;
+  height: 30px;
+  text-align: left;
+  padding-left: 15px;
+}
+.slide-img {
+  width: 100%;
+}
+.slide-img img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.slide-pages {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+.slide-pages li {
+  display: inline-block;
+  padding: 0 10px;
+  cursor: pointer;
+  color: #fff;
+}
+.slide-pages li .on {
+  text-decoration: underline;
+}
 </style>

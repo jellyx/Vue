@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/home.vue'
-import Carousel from '../components/carousel.vue'
+import Gakki from '../components/gakki.vue'
 import Shop from '../components/shop.vue'
-import BBS from '../components/bbs.vue'
+import Todolist from '../components/todolist.vue'
 
 Vue.use(Router)
 
@@ -15,9 +15,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/carousel',
-      name: 'Carousel',
-      component: Carousel
+      path: '/gakki',
+      name: 'gakki',
+      component: Gakki
     },
     {
       path: '/shop',
@@ -25,9 +25,9 @@ export default new Router({
       component: Shop
     },
     {
-      path: '/bbs',
-      name: 'BBS',
-      component: BBS
+      path: '/todolist',
+      name: 'Todolist',
+      component: Todolist
     },
     {
       path: '/',   //默认页

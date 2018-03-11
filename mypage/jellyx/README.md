@@ -1,21 +1,5 @@
-# jellyx
-
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+使用vue2.0和vue-router搭建的一个网站，目前正在升级vuex管理数据中。
+首页包括图片切换、轮播图、3D旋转魔方三部分，
+第二页是vue制作的瀑布流，
+最后一页是简易留言板
+vue搭建购物车将在升级vuex完成后开始。
